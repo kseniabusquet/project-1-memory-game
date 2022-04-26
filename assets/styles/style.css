@@ -143,6 +143,11 @@ footer {
     box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px,rgba(45, 35, 66, 0.3) 0 7px 13px -3px,#f674f6 0 -3px 0 inset;
 }
 
+#made-with-brain {
+    margin-top: 5px;
+    font-size: 12px;
+}
+
 #pink-bg {
     width: 500px;
 }
