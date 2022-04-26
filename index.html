@@ -7,27 +7,94 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;600&family=Special+Elite&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bungee+Shade&family=Montserrat:wght@100;300;400;600&family=Special+Elite&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bubblegum+Sans&family=Special+Elite&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./assets/styles/style.css">
     <title>Memory Game</title>
 </head>
 <body>
     <div class="game">
+        <div class = "bg-image">
+            <img id = "pink-bg" src = "assets/img/title-bg.png" alt = "pink background">
+        <p class = "title">Memory Game</p>
+        </div>
         <div class="controls">
-            <button>Start</button>
+            <button class = "btn" id = "btn-start" role = "button">Start</button>
+            <button class = "btn" role = "button">Reset</button>
             <div class="stats">
-                <div class="moves">0 moves</div>
-                <div class="timer">time: 0 sec</div>
+                <div class="moves">Moves: 0</div>
+                <div class="timer">Time: 0 sec</div>
             </div>
         </div>
-        <div class="board-container">
-            <div class="board" data-dimension="4"></div>
-            <div class="win">You won!</div>
-        </div>
+
+        <section class="memory-game">
+
+            <div class="memory-card">
+                <img class="front-face" src="assets/img/bacon.png" alt="Bacon">
+                <img class="back-face" src="assets/img/card-back.png" alt="Memory Card">
+            </div>
+
+            <div class="memory-card">
+                <img class="front-face" src="assets/img/bacon.png" alt="Bacon">
+                <img class="back-face" src="assets/img/card-back.png" alt="Memory Card">
+            </div>
+
+            <div class="memory-card">
+                <img class="front-face" src="assets/img/doughnut.png" alt="Doughnut">
+                <img class="back-face" src="assets/img/card-back.png" alt="Memory Card">
+            </div>
+
+            <div class="memory-card">
+                <img class="front-face" src="assets/img/doughnut.png" alt="Doughnut">
+                <img class="back-face" src="assets/img/card-back.png" alt="Memory Card">
+            </div>
+
+            <div class="memory-card">
+                <img class="front-face" src="assets/img/french-fries.png" alt="French Fries">
+                <img class="back-face" src="assets/img/card-back.png" alt="Memory Card">
+            </div>
+
+            <div class="memory-card">
+                <img class="front-face" src="assets/img/french-fries.png" alt="French Fries">
+                <img class="back-face" src="assets/img/card-back.png" alt="Memory Card">
+            </div>
+
+            <div class="memory-card">
+                <img class="front-face" src="assets/img/pizza.png" alt="Pizza">
+                <img class="back-face" src="assets/img/card-back.png" alt="Memory Card">
+            </div>
+
+            <div class="memory-card">
+                <img class="front-face" src="assets/img/pizza.png" alt="Pizza">
+                <img class="back-face" src="assets/img/card-back.png" alt="Memory Card">
+            </div>
+
+            <div class="memory-card">
+                <img class="front-face" src="assets/img/popcorn.png" alt="Popcorn">
+                <img class="back-face" src="assets/img/card-back.png" alt="Memory Card">
+            </div>
+
+            <div class="memory-card">
+                <img class="front-face" src="assets/img/popcorn.png" alt="Popcorn">
+                <img class="back-face" src="assets/img/card-back.png" alt="Memory Card">
+            </div>
+
+            <div class="memory-card">
+                <img class="front-face" src="assets/img/poultry-leg.png" alt="Poultry Leg">
+                <img class="back-face" src="assets/img/card-back.png" alt="Memory Card">
+            </div>
+
+            <div class="memory-card">
+                <img class="front-face" src="assets/img/poultry-leg.png" alt="Poultry Leg">
+                <img class="back-face" src="assets/img/card-back.png" alt="Memory Card">
+            </div>
+
+          </section>
     </div>
     
     <footer>
         <p><a class = "credits" href = "credits.html">Credits</a></p>
-        <p>Made with ♡ in São Paulo</p>
+        <p>Made with 🧠 in São Paulo by Ksenia Busquet</p>
     </footer>
 </div>
 
