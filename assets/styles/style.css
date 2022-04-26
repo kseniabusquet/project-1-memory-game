@@ -21,7 +21,7 @@ button {
 }
 
 footer {
-    position:fixed;
+    position:absolute;
     padding-top: 10px;
     bottom:0;
     width:100%;
@@ -84,6 +84,10 @@ footer {
     font-size: 18px;
 }
 
+.front-face {
+    transform: rotateY(180deg);
+}
+
 .front-face,
 .back-face {
     width: 100%;
@@ -92,6 +96,7 @@ footer {
     position: absolute;
     border-radius: 5px;
     background: #93a4ff;
+    backface-visibility: hidden;
 }
 
 .game {
@@ -112,6 +117,18 @@ footer {
     margin: 5px;
     position: relative;
     box-shadow: 1px 1px 1px rgba(0,0,0,.3);
+    transform: scale(1);
+    transform-style: preserve-3d;
+    transition: transform .5s;
+}
+
+.memory-card:active {
+    transform: scale(0.97);
+    transition: transform .2s;
+}
+
+.memory-card.flip {
+    transform: rotateY(180deg);
 }
   
 .memory-game {
@@ -120,6 +137,7 @@ footer {
     margin: auto;
     display: flex;
     flex-wrap: wrap;
+    perspective: 1000px;
 }
 
 .stats {
@@ -145,10 +163,11 @@ footer {
 
 #made-with-brain {
     margin-top: 5px;
-    font-size: 12px;
+    font-size: 14px;
 }
 
 #pink-bg {
     width: 500px;
 }
+
 
