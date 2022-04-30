@@ -19,9 +19,6 @@
 //3. The maximum of 3 rounds can be played, after this the game will be resetted 
 //4. After the 3 rounds, the best score will be displayed
 
-//Perguntas:
-//1. Win: after the winning the round the cards are not clickable X + the board is not shuffled ?
-//2. Rounds number: how to set the maximum of 3 rounds?
 // setTimeOut !!!
 //currentRound === maxRounds??
 
@@ -35,12 +32,14 @@ const win = document.querySelector('.win')
 const results = document.querySelector('.results')
 const rounds = document.querySelector('.rounds')
 const timeLeft = document.querySelector('.time-left')
+const bestRoundContainer = document.querySelector('.best-round-container')
 
 const bgAudio = document.getElementById("bg-audio")
 const winAudio = document.getElementById("win-audio")
 const loseAudio = document.getElementById("lose-audio")
 
-const maxRounds = 3;
+const maxRounds = 2;
+roundResults = [];
 
 const state = {
     gameStarted: false,
@@ -68,7 +67,7 @@ const startGame = () => {
     start.classList.add('inactive')
 
     let minutes, seconds;
-    let timer = 5;
+    let timer = 40;
 
     state.loop = setInterval(() => {
         
@@ -86,6 +85,8 @@ const startGame = () => {
       bgAudio.pause();
       loseAudio.play();
 
+      roundResults.push(state.totalFlips)
+
       setTimeout(() => {
       alert("Game over ☹️")
 
@@ -99,9 +100,8 @@ const startGame = () => {
       }, 500)
 
       
-
+      checkBestRound();
       resetGame();
-      console.log(state.currentRound)
 
     }
         
@@ -114,14 +114,15 @@ const resetGame = () => {
 
         start.classList.remove('inactive')
         timeLeft.textContent = "Time left: 00:05";
-        timer = 5;
+        timer = 40;
         start.classList.remove('inactive')
+
         state.totalFlips = 0
         moves.innerText = `Moves: ${state.totalFlips}`
         state.totalTime = 0
         state.gameStarted = false;
         state.currentRound++; 
-        console.log(state.currentRound)
+       
        
         clearInterval(state.loop)
         bgAudio.pause()
@@ -169,15 +170,19 @@ function flipCard() {
             </span>
         `
         rounds.appendChild(newLi)
-        
+        roundResults.push(state.totalFlips)
+
+        if (state.currentRound >= maxRounds) {
+
+          checkBestRound();
+          resetGame();
+        }
         resetGame();
 
         //start over again
         cards.forEach(card => card.classList.remove('flip'))
         cards.forEach(card => card.addEventListener('click', flipCard));
 
-
-        //after 3 rounds display the round with the best results
     }, 1000)
  }
 }
@@ -214,13 +219,34 @@ function resetBoard() {
     [firstCard, secondCard] = [null, null];
   }
 
-  // Immediately Invoked Function Expression (IIFE) = will execute itself right after its declaration
-  function shuffle() {
+function shuffle() {
     cards.forEach(card => {
       let randomPos = Math.floor(Math.random() * 12);
       card.style.order = randomPos;
     });
   };
+
+
+function checkBestRound(){
+
+  console.log(roundResults)
+
+    let minMoves = roundResults[0]
+    let minMovesRound = 1;
+
+    for (i = 1; i < roundResults.length; i++){
+      if (roundResults[i] < minMoves) {
+        minMoves = roundResults[i]
+        minMovesRound = roundResults.indexOf(roundResults[i]) + 1
+       }
+      }
+
+    const newItem = document.createElement("span");
+        newItem.innerText = `
+                The round with the minimum moves number: round #${minMovesRound} with ${minMoves} moves
+        `
+        results.appendChild(newItem)
+  }
 
 
 window.onload = shuffle();
