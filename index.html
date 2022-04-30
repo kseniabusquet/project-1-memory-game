@@ -13,97 +13,102 @@
     <title>Memory Game</title>
 </head>
 <body>
+    <div class="container">
+        <div class="results">
+            <ol class = "rounds"></ol>
+        </div>
     <div class="game">
         <div class = "bg-image">
             <img id = "pink-bg" src = "assets/img/title-bg.png" alt = "pink background">
         <p class = "title">Memory Game</p>
         </div>
         <div class="controls">
-            <button class = "btn" id = "btn-start" role = "button">Start</button>
-            <button class = "btn" role = "button">Reset</button>
+            <button class = "btn btn-start" id = "start" role = "button">Start</button>
+            <button class = "btn btn-reset" id = "reset" role = "button">Reset</button>
             <div class="stats">
                 <div class="moves">Moves: 0</div>
-                <div class="timer">Time: 0 sec</div>
+                <!--<div class="timer">Time: 0 sec</div>-->
+                <div class="time-left">Time left: 00:05</div>
             </div>
         </div>
 
         <section class="memory-game">
 
-            <div class="memory-card">
-                <img class="front-face" src="assets/img/bacon.png" alt="Bacon">
-                <img class="back-face" src="assets/img/card-back.png" alt="Memory Card">
+            <div class="card" data-framework = "bacon">
+                <img class="front" src="assets/img/bacon.png" alt="Bacon">
+                <img class="back" src="assets/img/card-back.png" alt="Card">
             </div>
 
-            <div class="memory-card">
-                <img class="front-face" src="assets/img/bacon.png" alt="Bacon">
-                <img class="back-face" src="assets/img/card-back.png" alt="Memory Card">
+            <div class="card" data-framework = "bacon">
+                <img class="front" src="assets/img/bacon.png" alt="Bacon">
+                <img class="back" src="assets/img/card-back.png" alt="Card">
             </div>
 
-            <div class="memory-card">
-                <img class="front-face" src="assets/img/doughnut.png" alt="Doughnut">
-                <img class="back-face" src="assets/img/card-back.png" alt="Memory Card">
+            <div class="card" data-framework = "doughnut">
+                <img class="front" src="assets/img/doughnut.png" alt="Doughnut">
+                <img class="back" src="assets/img/card-back.png" alt="Card">
             </div>
 
-            <div class="memory-card">
-                <img class="front-face" src="assets/img/doughnut.png" alt="Doughnut">
-                <img class="back-face" src="assets/img/card-back.png" alt="Memory Card">
+            <div class="card" data-framework = "doughnut">
+                <img class="front" src="assets/img/doughnut.png" alt="Doughnut">
+                <img class="back" src="assets/img/card-back.png" alt="Card">
             </div>
 
-            <div class="memory-card">
-                <img class="front-face" src="assets/img/french-fries.png" alt="French Fries">
-                <img class="back-face" src="assets/img/card-back.png" alt="Memory Card">
+            <div class="card" data-framework = "french-fries">
+                <img class="front" src="assets/img/french-fries.png" alt="French Fries">
+                <img class="back" src="assets/img/card-back.png" alt="Card">
             </div>
 
-            <div class="memory-card">
-                <img class="front-face" src="assets/img/french-fries.png" alt="French Fries">
-                <img class="back-face" src="assets/img/card-back.png" alt="Memory Card">
+            <div class="card" data-framework = "french-fries">
+                <img class="front" src="assets/img/french-fries.png" alt="French Fries">
+                <img class="back" src="assets/img/card-back.png" alt="Card">
             </div>
 
-            <div class="memory-card">
-                <img class="front-face" src="assets/img/pizza.png" alt="Pizza">
-                <img class="back-face" src="assets/img/card-back.png" alt="Memory Card">
+            <div class="card" data-framework = "pizza">
+                <img class="front" src="assets/img/pizza.png" alt="Pizza">
+                <img class="back" src="assets/img/card-back.png" alt="Card">
             </div>
 
-            <div class="memory-card">
-                <img class="front-face" src="assets/img/pizza.png" alt="Pizza">
-                <img class="back-face" src="assets/img/card-back.png" alt="Memory Card">
+            <div class="card" data-framework = "pizza">
+                <img class="front" src="assets/img/pizza.png" alt="Pizza">
+                <img class="back" src="assets/img/card-back.png" alt="Card">
             </div>
 
-            <div class="memory-card">
-                <img class="front-face" src="assets/img/popcorn.png" alt="Popcorn">
-                <img class="back-face" src="assets/img/card-back.png" alt="Memory Card">
+            <div class="card" data-framework = "popcorn">
+                <img class="front" src="assets/img/popcorn.png" alt="Popcorn">
+                <img class="back" src="assets/img/card-back.png" alt="Card">
             </div>
 
-            <div class="memory-card">
-                <img class="front-face" src="assets/img/popcorn.png" alt="Popcorn">
-                <img class="back-face" src="assets/img/card-back.png" alt="Memory Card">
+            <div class="card" data-framework = "popcorn">
+                <img class="front" src="assets/img/popcorn.png" alt="Popcorn">
+                <img class="back" src="assets/img/card-back.png" alt="Card">
             </div>
 
-            <div class="memory-card">
-                <img class="front-face" src="assets/img/poultry-leg.png" alt="Poultry Leg">
-                <img class="back-face" src="assets/img/card-back.png" alt="Memory Card">
+            <div class="card" data-framework = "poultry-leg">
+                <img class="front" src="assets/img/poultry-leg.png" alt="Poultry Leg">
+                <img class="back" src="assets/img/card-back.png" alt="Card">
             </div>
 
-            <div class="memory-card">
-                <img class="front-face" src="assets/img/poultry-leg.png" alt="Poultry Leg">
-                <img class="back-face" src="assets/img/card-back.png" alt="Memory Card">
+            <div class="card" data-framework = "poultry-leg">
+                <img class="front" src="assets/img/poultry-leg.png" alt="Poultry Leg">
+                <img class="back" src="assets/img/card-back.png" alt="Card">
             </div>
+
+            <div class = "win"></div>
 
           </section>
     </div>
+</div>
     
     <footer>
-        <p><a class = "credits" href = "credits.html">Credits</a></p>
         <p id = "made-with-brain">Made with 🧠 in São Paulo by <a href = "https://github.com/kseniabusquet">Ksenia Busquet</a></p>
     </footer>
 </div>
 
     <audio id = "win-audio" src = "assets/sounds/win.wav"></audio> 
-    <audio id = "complete-audio" src = "assets/sounds/level-complete.wav"></audio> 
     <audio id = "lose-audio" src = "assets/sounds/lose.wav"></audio> 
     <audio id = "bg-audio" class = "bg-audio-active" loop = "true" src = "assets/sounds/background.mp3"></audio> 
 
     <script src="./assets/scripts/game.js"></script>
-    <script src="./assets/scripts/index.js"></script>
 </body>
 </html>
