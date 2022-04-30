@@ -14,7 +14,7 @@
 
 //TODO:
 
-//1. Reset board after win
+//1. Reset board after win 
 //2. Set the maximal rounds number
 //3. The maximum of 3 rounds can be played, after this the game will be resetted 
 //4. After the 3 rounds, the best score will be displayed
@@ -88,7 +88,17 @@ const startGame = () => {
 
       setTimeout(() => {
       alert("Game over ☹️")
+
+      const newLi = document.createElement("li");
+        newLi.innerHTML = `
+            <span class="lose-text">
+                Round lost :(
+            </span>
+        `
+        rounds.appendChild(newLi)
       }, 500)
+
+      
 
       resetGame();
       console.log(state.currentRound)
