@@ -40,6 +40,7 @@ const loseAudio = document.getElementById("lose-audio")
 
 const maxRounds = 2;
 roundResults = [];
+timeResults = []
 
 const state = {
     gameStarted: false,
@@ -86,6 +87,7 @@ const startGame = () => {
       loseAudio.play();
 
       roundResults.push(state.totalFlips)
+      timeResults.push(state.totalTime)
 
       setTimeout(() => {
       alert("Game over ☹️")
@@ -171,12 +173,14 @@ function flipCard() {
         `
         rounds.appendChild(newLi)
         roundResults.push(state.totalFlips)
+        timeResults.push(state.totalTime)
 
-        if (state.currentRound >= maxRounds) {
+        if (state.currentRound > maxRounds) {
 
           checkBestRound();
-          resetGame();
+          restartGame()
         }
+
         resetGame();
 
         //start over again
@@ -184,6 +188,8 @@ function flipCard() {
         cards.forEach(card => card.addEventListener('click', flipCard));
 
     }, 1000)
+
+    
  }
 }
 
@@ -231,21 +237,29 @@ function checkBestRound(){
 
   console.log(roundResults)
 
-    let minMoves = roundResults[0]
-    let minMovesRound = 1;
+  const minMoves = Math.min(...roundResults)
+  let minMovesRound = roundResults.indexOf(minMoves)+1
 
-    for (i = 1; i < roundResults.length; i++){
-      if (roundResults[i] < minMoves) {
-        minMoves = roundResults[i]
-        minMovesRound = roundResults.indexOf(roundResults[i]) + 1
-       }
-      }
+
+  //find an error in the algorithm
+  for (i = 0; i < roundResults.length; i++) {
+    if (roundResults[i] === minMoves){
+      if (timeResults[i] < timeResults[minMovesRound])
+      minMovesRound = i+1; 
+    }
+  }
 
     const newItem = document.createElement("span");
         newItem.innerText = `
-                The round with the minimum moves number: round #${minMovesRound} with ${minMoves} moves
+                The round with the best results: round #${minMovesRound} with ${minMoves} moves
         `
         results.appendChild(newItem)
+  }
+
+  function restartGame(){
+    memoryGame.innerHTML = "<img src=\"https://i.gifer.com/Ioci.gif\">"
+    start.removeEventListener("click", startGame)
+    reset.removeEventListener("click", resetGame)
   }
 
 
