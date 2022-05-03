@@ -201,3 +201,11 @@ header {
 .best-round-container {
     margin-top: 50px;
 }
+
+.hidden{
+    display: none !important;
+}
+
+.unhidden{
+    display:block;
+}

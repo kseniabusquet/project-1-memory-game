@@ -14,13 +14,9 @@
 
 //TODO:
 
-//1. Reset board after win 
-//2. Set the maximal rounds number
-//3. The maximum of 3 rounds can be played, after this the game will be resetted 
-//4. After the 3 rounds, the best score will be displayed
+//1. Fix round counter when lose 
+//2. Fix best round number logic
 
-// setTimeOut !!!
-//currentRound === maxRounds??
 
 
 const cards = document.querySelectorAll('.card');
@@ -33,12 +29,13 @@ const results = document.querySelector('.results')
 const rounds = document.querySelector('.rounds')
 const timeLeft = document.querySelector('.time-left')
 const bestRoundContainer = document.querySelector('.best-round-container')
+const gif = document.querySelector('.gif')
 
 const bgAudio = document.getElementById("bg-audio")
 const winAudio = document.getElementById("win-audio")
 const loseAudio = document.getElementById("lose-audio")
 
-const maxRounds = 2
+const maxRounds = 3
 
 let roundResults = []
 
@@ -68,7 +65,7 @@ const startGame = () => {
     start.classList.add('inactive')
 
     let minutes, seconds;
-    let timer = 40;
+    let timer = 5;
 
     state.loop = setInterval(() => {
         
@@ -86,7 +83,8 @@ const startGame = () => {
       bgAudio.pause();
       loseAudio.play();
 
-roundResults.push({totalFlips: state.totalFlips, totalTime: state.totalTime})
+    roundResults.push({totalFlips: state.totalFlips, totalTime: state.totalTime})
+    state.currentRound++
 
       setTimeout(() => {
       alert("Game over ☹️")
@@ -101,7 +99,7 @@ roundResults.push({totalFlips: state.totalFlips, totalTime: state.totalTime})
       }, 500)
 
       
-      checkBestRound();
+      //checkBestRound();
       resetGame();
 
     }
@@ -114,8 +112,8 @@ const resetGame = () => {
         cards.forEach(card => card.classList.remove('flip'))
 
         start.classList.remove('inactive')
-        timeLeft.textContent = "Time left: 00:05";
-        timer = 40;
+        timeLeft.textContent = "Time left: 00:40";
+        timer = 5;
         start.classList.remove('inactive')
 
         state.totalFlips = 0
@@ -173,10 +171,9 @@ function flipCard() {
         rounds.appendChild(newLi)
         roundResults.push({totalFlips: state.totalFlips, totalTime: state.totalTime})
 
-
-        if (state.currentRound > maxRounds) {
-
+        if (state.currentRound >= maxRounds) {
           checkBestRound();
+          
           restartGame()
         }
 
@@ -233,30 +230,50 @@ function shuffle() {
 
 
 function checkBestRound(){
+  let bestRound = {}
+  let bestRoundNumber;
 
-  console.log(roundResults)
+  let res = roundResults.reduce(function(prev, current, index) {
 
-  let minMovesRound = roundResults.indexOf(minMoves)+1
+    if (prev.totalFlips < current.totalFlips) {
+      bestRound = Object.assign({}, prev)
+      bestRoundNumber = index
+    }
+    else if (prev.totalFlips > current.totalFlips) {
+      bestRound = Object.assign({}, current)
+      bestRoundNumber = index++
+    }
+    else if ((prev.totalFlips === current.totalFlips) && (prev.totalTime < current.totalTime)){
+      bestRound = Object.assign({}, prev)
+      bestRoundNumber = index++
+    } 
 
-  //reduce : comparar objeto (!!!!) atual com objeto anterior
+    else if ((prev.totalFlips === current.totalFlips) && (prev.totalTime > current.totalTime)) {
+      bestRound = Object.assign({}, current)
+      bestRoundNumber = index
+    }
+
+    else console.log("There is more than 1 round with the same results")
+
+  }, {totalFlips:0, totalTime:0})
 
 
     const newItem = document.createElement("span");
         newItem.innerText = `
-                The round with the best results: round #${minMovesRound} with ${minMoves} moves
+                The round with the best results: round #${bestRoundNumber} with ${res} moves
         `
         results.appendChild(newItem)
   }
 
   function restartGame(){
-    //div display none
-    memoryGame.innerHTML = "<img src=\"https://i.gifer.com/Ioci.gif\">"
-    start.removeEventListener("click", startGame)
-    reset.removeEventListener("click", resetGame)
+    memoryGame.classList.add('hidden')
+    gif.classList.remove('hidden')
+    start.removeEventListener('click', startGame)
+    reset.removeEventListener('click', resetGame)
   }
 
 
 window.onload = shuffle();
 cards.forEach(card => card.addEventListener('click', flipCard));
-start.addEventListener("click", startGame)
-reset.addEventListener("click", resetGame)
+start.addEventListener('click', startGame)
+reset.addEventListener('click', resetGame)
