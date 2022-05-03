@@ -38,9 +38,9 @@ const bgAudio = document.getElementById("bg-audio")
 const winAudio = document.getElementById("win-audio")
 const loseAudio = document.getElementById("lose-audio")
 
-const maxRounds = 2;
-roundResults = [];
-timeResults = []
+const maxRounds = 2
+
+let roundResults = []
 
 const state = {
     gameStarted: false,
@@ -86,8 +86,7 @@ const startGame = () => {
       bgAudio.pause();
       loseAudio.play();
 
-      roundResults.push(state.totalFlips)
-      timeResults.push(state.totalTime)
+roundResults.push({totalFlips: state.totalFlips, totalTime: state.totalTime})
 
       setTimeout(() => {
       alert("Game over ☹️")
@@ -172,8 +171,8 @@ function flipCard() {
             </span>
         `
         rounds.appendChild(newLi)
-        roundResults.push(state.totalFlips)
-        timeResults.push(state.totalTime)
+        roundResults.push({totalFlips: state.totalFlips, totalTime: state.totalTime})
+
 
         if (state.currentRound > maxRounds) {
 
@@ -237,17 +236,10 @@ function checkBestRound(){
 
   console.log(roundResults)
 
-  const minMoves = Math.min(...roundResults)
   let minMovesRound = roundResults.indexOf(minMoves)+1
 
+  //reduce : comparar objeto (!!!!) atual com objeto anterior
 
-  //find an error in the algorithm
-  for (i = 0; i < roundResults.length; i++) {
-    if (roundResults[i] === minMoves){
-      if (timeResults[i] < timeResults[minMovesRound])
-      minMovesRound = i+1; 
-    }
-  }
 
     const newItem = document.createElement("span");
         newItem.innerText = `
@@ -257,6 +249,7 @@ function checkBestRound(){
   }
 
   function restartGame(){
+    //div display none
     memoryGame.innerHTML = "<img src=\"https://i.gifer.com/Ioci.gif\">"
     start.removeEventListener("click", startGame)
     reset.removeEventListener("click", resetGame)
