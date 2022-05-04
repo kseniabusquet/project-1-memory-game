@@ -14,10 +14,8 @@
 
 //TODO:
 
-//1. Fix round counter when lose 
+//1. Fix RESET button
 //2. Fix best round number logic
-
-
 
 const cards = document.querySelectorAll('.card');
 const moves = document.querySelector('.moves')
@@ -61,11 +59,10 @@ const startGame = () => {
     state.gameStarted = true
     bgAudio.play()
 
-    //grey out the START button
     start.classList.add('inactive')
 
     let minutes, seconds;
-    let timer = 5;
+    let timer = 40;
 
     state.loop = setInterval(() => {
         
@@ -78,56 +75,66 @@ const startGame = () => {
 
         timeLeft.textContent = `Time left: ${minutes}:${seconds}`; 
 
-    } else {
-
+    } 
+    
+    else {
+      
       bgAudio.pause();
       loseAudio.play();
 
-    roundResults.push({totalFlips: state.totalFlips, totalTime: state.totalTime})
-    state.currentRound++
+      roundResults.push({totalFlips: state.totalFlips, totalTime: state.totalTime})
+    
 
-      setTimeout(() => {
-      alert("Game over ☹️")
-
-      const newLi = document.createElement("li");
+      if (state.currentRound < maxRounds){
+        const newLi = document.createElement("li");
         newLi.innerHTML = `
-            <span class="lose-text">
-                Round lost :(
-            </span>
-        `
-        rounds.appendChild(newLi)
-      }, 500)
-
-      
-      //checkBestRound();
+          <span class="lose-text">
+              Round lost :(
+          </span>
+      `
+      rounds.appendChild(newLi)
       resetGame();
-
+      alert("Game over ☹️")
+     }
+    else {
+    newLi = document.createElement("li");
+    newLi.innerHTML = `
+      <span class="lose-text">
+          Round lost :(
+      </span>
+  `
+    rounds.appendChild(newLi)
+    resetGame()
+    restartGame()
+     }   
     }
-        
-    }, 1000)
-}
+  }, 1000)
+
+  }
 
 const resetGame = () => {
 
         cards.forEach(card => card.classList.remove('flip'))
-
+        cards.forEach(card => card.addEventListener('click', flipCard));
         start.classList.remove('inactive')
         timeLeft.textContent = "Time left: 00:40";
-        timer = 5;
-        start.classList.remove('inactive')
-
+        timer = 40;
         state.totalFlips = 0
         moves.innerText = `Moves: ${state.totalFlips}`
         state.totalTime = 0
         state.gameStarted = false;
         state.currentRound++; 
        
-       
         clearInterval(state.loop)
         bgAudio.pause()
         unflipCards()
         shuffle()
         resetBoard()
+
+        if (state.currentRound > maxRounds) {
+          alert("Maximum number of resets reached")
+          restartGame()
+        }
 }
 
 function flipCard() {
@@ -154,11 +161,7 @@ function flipCard() {
 
    // If there are no more cards that we can flip, we won the game
     if (document.querySelectorAll('.card.flip').length === 12) {
-        
-      //stop the audio
         bgAudio.pause()
-
-        //play the win audio
         winAudio.play();
         setTimeout(() => {
         const newLi = document.createElement("li");
@@ -171,21 +174,23 @@ function flipCard() {
         rounds.appendChild(newLi)
         roundResults.push({totalFlips: state.totalFlips, totalTime: state.totalTime})
 
-        if (state.currentRound >= maxRounds) {
-          checkBestRound();
-          
+        if (state.currentRound < maxRounds) {
+          resetGame();
+
+          cards.forEach(card => card.classList.remove('flip'))
+          cards.forEach(card => card.addEventListener('click', flipCard))
+
+        }
+
+        else {
+          //checkBestRound();
+          resetGame()
           restartGame()
         }
 
-        resetGame();
+        
 
-        //start over again
-        cards.forEach(card => card.classList.remove('flip'))
-        cards.forEach(card => card.addEventListener('click', flipCard));
-
-    }, 1000)
-
-    
+    }, 1000)  
  }
 }
 
@@ -269,7 +274,10 @@ function checkBestRound(){
     memoryGame.classList.add('hidden')
     gif.classList.remove('hidden')
     start.removeEventListener('click', startGame)
+    start.classList.add('inactive')
     reset.removeEventListener('click', resetGame)
+    reset.classList.add('inactive')
+
   }
 
 

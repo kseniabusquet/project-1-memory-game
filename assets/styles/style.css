@@ -31,6 +31,11 @@ header {
     width: 100%;
 }
 
+p {
+    font-size: 24px;
+    text-align: center;
+}
+
 .btn {
   align-items: center;
   appearance: none;
@@ -173,6 +178,7 @@ header {
 
 #made-with-brain {
     margin-top: 5px;
+    margin-right: 50px;
     font-size: 14px;
 }
 
@@ -209,3 +215,4 @@ header {
 .unhidden{
     display:block;
 }
+
