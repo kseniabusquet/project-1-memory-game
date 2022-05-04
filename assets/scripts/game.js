@@ -183,7 +183,7 @@ function flipCard() {
         }
 
         else {
-          //checkBestRound();
+          checkBestRound();
           resetGame()
           restartGame()
         }
@@ -235,37 +235,27 @@ function shuffle() {
 
 
 function checkBestRound(){
-  let bestRound = {}
-  let bestRoundNumber;
+  let bestRound = 0
 
-  let res = roundResults.reduce(function(prev, current, index) {
+  for (i = 1; i < roundResults.length; i++){
+    if ((roundResults[i].totalFlips <= roundResults[bestRound].totalFlips) && (roundResults[i].totalTime < roundResults[bestRound].totalTime)) {
+      bestRound = i
+     }
 
-    if (prev.totalFlips < current.totalFlips) {
-      bestRound = Object.assign({}, prev)
-      bestRoundNumber = index
+     else if ((roundResults[i].totalFlips <= roundResults[bestRound].totalFlips) && (roundResults[i].totalTime === roundResults[bestRound].totalTime)){
+      const newItem = document.createElement("span");
+      newItem.innerText = `
+              There is more than 1 round with the best results: round #${i+1} and round #${bestRound} with ${roundResults[i].totalFlips} moves under ${roundResults[i].totalTime} seconds
+      `
+      results.appendChild(newItem)
+
+      return
+     } 
     }
-    else if (prev.totalFlips > current.totalFlips) {
-      bestRound = Object.assign({}, current)
-      bestRoundNumber = index++
-    }
-    else if ((prev.totalFlips === current.totalFlips) && (prev.totalTime < current.totalTime)){
-      bestRound = Object.assign({}, prev)
-      bestRoundNumber = index++
-    } 
-
-    else if ((prev.totalFlips === current.totalFlips) && (prev.totalTime > current.totalTime)) {
-      bestRound = Object.assign({}, current)
-      bestRoundNumber = index
-    }
-
-    else console.log("There is more than 1 round with the same results")
-
-  }, {totalFlips:0, totalTime:0})
-
 
     const newItem = document.createElement("span");
         newItem.innerText = `
-                The round with the best results: round #${bestRoundNumber} with ${res} moves
+                The round with the best results: round #${bestRound+1} with ${roundResults[bestRound].totalFlips} moves under ${roundResults[bestRound].totalTime} seconds
         `
         results.appendChild(newItem)
   }
