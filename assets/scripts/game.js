@@ -130,11 +130,6 @@ const resetGame = () => {
         unflipCards()
         shuffle()
         resetBoard()
-
-        if (state.currentRound > maxRounds) {
-          alert("Maximum number of resets reached")
-          restartGame()
-        }
 }
 
 function flipCard() {
@@ -270,8 +265,18 @@ function checkBestRound(){
 
   }
 
+  function checkReset(){
+    if (state.currentRound >= maxRounds) {
+      alert("Maximum number of resets reached")
+      start.classList.add('inactive')
+      restartGame()
+    }
+
+    resetGame()
+  }
+
 
 window.onload = shuffle();
 cards.forEach(card => card.addEventListener('click', flipCard));
 start.addEventListener('click', startGame)
-reset.addEventListener('click', resetGame)
+reset.addEventListener('click', checkReset)
