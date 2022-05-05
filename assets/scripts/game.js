@@ -89,7 +89,7 @@ const startGame = () => {
         const newLi = document.createElement("li");
         newLi.innerHTML = `
           <span class="lose-text">
-              Round lost :(
+              Round #${state.currentRound} lost :(
           </span>
       `
       rounds.appendChild(newLi)
@@ -100,7 +100,7 @@ const startGame = () => {
     newLi = document.createElement("li");
     newLi.innerHTML = `
       <span class="lose-text">
-          Round lost :(
+          Round #${state.currentRound} lost :(
       </span>
   `
     rounds.appendChild(newLi)
@@ -162,7 +162,7 @@ function flipCard() {
         const newLi = document.createElement("li");
         newLi.innerHTML = `
             <span class="win-text">
-                Round completed with <span>${state.totalFlips}</span> moves<br />
+                Round #${state.currentRound} completed with <span>${state.totalFlips}</span> moves<br />
                 under <span>${state.totalTime}</span> seconds
             </span>
         `
@@ -178,6 +178,8 @@ function flipCard() {
         }
 
         else {
+          reset.classList.add('inactive')
+          reset.removeEventListener('click', checkReset)
           checkBestRound();
           resetGame()
           restartGame()
@@ -240,7 +242,7 @@ function checkBestRound(){
      else if ((roundResults[i].totalFlips <= roundResults[bestRound].totalFlips) && (roundResults[i].totalTime === roundResults[bestRound].totalTime)){
       const newItem = document.createElement("span");
       newItem.innerText = `
-              There is more than 1 round with the best results: round #${i+1} and round #${bestRound} with ${roundResults[i].totalFlips} moves under ${roundResults[i].totalTime} seconds
+              There is more than one round with the best results: round #${bestRound+1} and round #${i+1} with ${roundResults[i].totalFlips} moves under ${roundResults[i].totalTime} seconds
       `
       results.appendChild(newItem)
 
@@ -266,13 +268,43 @@ function checkBestRound(){
   }
 
   function checkReset(){
-    if (state.currentRound >= maxRounds) {
-      alert("Maximum number of resets reached")
-      start.classList.add('inactive')
-      restartGame()
-    }
 
-    resetGame()
+    if (state.currentRound < maxRounds) {
+      console.log('current round: ' + state.currentRound )
+      const newLi = document.createElement("li");
+        newLi.innerHTML = `
+            <span class="lose-text">
+                Round #${state.currentRound} resetted
+            </span>
+        `
+        rounds.appendChild(newLi)
+        resetGame()
+  }
+    else if (state.currentRound >= maxRounds) {
+      console.log('current round: ' + state.currentRound )
+
+      const newLi = document.createElement("li");
+        newLi.innerHTML = `
+            <span class="lose-text">
+                Round #${state.currentRound} resetted
+            </span>
+        `
+        rounds.appendChild(newLi)
+
+        resetGame()
+        restartGame()
+
+      setTimeout(() => {
+        start.classList.add('inactive')
+        alert("Maximum number of resets reached")
+        }, 500)
+
+
+
+
+
+      //stop timer
+    }
   }
 
 

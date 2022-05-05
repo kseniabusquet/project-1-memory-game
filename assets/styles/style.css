@@ -157,7 +157,11 @@ p {
 
 .results {
     width: 491.6px;
-    padding: 195px 0 0 100px;
+    padding: 195px 95px 0 100px;
+}
+
+ol > li {
+    text-decoration-style: dotted;
 }
 
 .stats {
@@ -196,7 +200,7 @@ p {
 }
 
 .win-text,
-.best-round {
+.best-round, .lose-text {
     line-height: 1.5;
 }
 
