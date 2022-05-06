@@ -12,10 +12,6 @@
 // 12. When finished, the results will be shown with the total time spent and the number of moves X
 // 13. The results will be added to the left side of the page with a round number accordingly X
 
-//TODO:
-
-//1. Fix RESET button
-//2. Fix best round number logic
 
 const cards = document.querySelectorAll('.card');
 const moves = document.querySelector('.moves')
@@ -53,7 +49,6 @@ function computeTwoDigitNumber(value) {
     return value.toString().padStart(2, '0')
   }
 
-
 //the timer and move counter will start only after clicking the START button
 const startGame = () => {
     state.gameStarted = true
@@ -65,25 +60,18 @@ const startGame = () => {
     let timer = 40;
 
     state.loop = setInterval(() => {
-        
         if (--timer >= 0) {
         state.totalTime++
         moves.innerText = `Moves: ${state.totalFlips}`
-
         minutes = computeTwoDigitNumber(parseInt(timer / 60, 10));
         seconds = computeTwoDigitNumber(parseInt(timer % 60, 10));
-
         timeLeft.textContent = `Time left: ${minutes}:${seconds}`; 
-
     } 
-    
-    else {
-      
+  
+    else {    
       bgAudio.pause();
       loseAudio.play();
-
-      roundResults.push({totalFlips: state.totalFlips, totalTime: state.totalTime})
-    
+      roundResults.push({totalFlips: state.totalFlips, totalTime: state.totalTime})    
 
       if (state.currentRound < maxRounds){
         const newLi = document.createElement("li");
@@ -96,9 +84,10 @@ const startGame = () => {
       resetGame();
       alert("Game over ☹️")
      }
-    else {
-    newLi = document.createElement("li");
-    newLi.innerHTML = `
+    
+     else {
+      newLi = document.createElement("li");
+      newLi.innerHTML = `
       <span class="lose-text">
           Round #${state.currentRound} lost :(
       </span>
@@ -124,7 +113,6 @@ const resetGame = () => {
         state.totalTime = 0
         state.gameStarted = false;
         state.currentRound++; 
-       
         clearInterval(state.loop)
         bgAudio.pause()
         unflipCards()
@@ -136,12 +124,11 @@ function flipCard() {
     if (state.gameStarted === false) {
         alert("Please press the START button to start the game 🤗");
         return;
-    }
+      }
     if (lockBoard) return;
     if (this === firstCard) return;
 
     state.totalFlips++;
-
     this.classList.add('flip');
  
     if (!hasFlippedCard) {
@@ -171,10 +158,8 @@ function flipCard() {
 
         if (state.currentRound < maxRounds) {
           resetGame();
-
           cards.forEach(card => card.classList.remove('flip'))
           cards.forEach(card => card.addEventListener('click', flipCard))
-
         }
 
         else {
@@ -184,9 +169,6 @@ function flipCard() {
           resetGame()
           restartGame()
         }
-
-        
-
     }, 1000)  
  }
 }
@@ -196,24 +178,20 @@ function flipCard() {
      disableCards();
      return;
    }
-
    unflipCards();
  }
 
  function disableCards() {
    firstCard.removeEventListener('click', flipCard);
    secondCard.removeEventListener('click', flipCard);
-
    resetBoard();
  }
 
  function unflipCards() {
-     lockBoard = true;
-     
+     lockBoard = true;    
      setTimeout(() => {
      firstCard.classList.remove('flip');
      secondCard.classList.remove('flip');
-
      resetBoard();
    }, 1500);
  }
@@ -230,7 +208,6 @@ function shuffle() {
     });
   };
 
-
 function checkBestRound(){
   let bestRound = 0
 
@@ -238,14 +215,12 @@ function checkBestRound(){
     if ((roundResults[i].totalFlips <= roundResults[bestRound].totalFlips) && (roundResults[i].totalTime < roundResults[bestRound].totalTime)) {
       bestRound = i
      }
-
-     else if ((roundResults[i].totalFlips <= roundResults[bestRound].totalFlips) && (roundResults[i].totalTime === roundResults[bestRound].totalTime)){
+     else if ((roundResults[i].totalFlips <= roundResults[bestRound].totalFlips) && (roundResults[i].totalTime === roundResults[bestRound].totalTime) && (roundResults[i].totalTime !== 999)){
       const newItem = document.createElement("span");
       newItem.innerText = `
               There is more than one round with the best results: round #${bestRound+1} and round #${i+1} with ${roundResults[i].totalFlips} moves under ${roundResults[i].totalTime} seconds
       `
       results.appendChild(newItem)
-
       return
      } 
     }
@@ -264,13 +239,10 @@ function checkBestRound(){
     start.classList.add('inactive')
     reset.removeEventListener('click', resetGame)
     reset.classList.add('inactive')
-
   }
 
   function checkReset(){
-
-    if (state.currentRound < maxRounds) {
-      console.log('current round: ' + state.currentRound )
+    if (state.currentRound < maxRounds) {  
       const newLi = document.createElement("li");
         newLi.innerHTML = `
             <span class="lose-text">
@@ -278,11 +250,10 @@ function checkBestRound(){
             </span>
         `
         rounds.appendChild(newLi)
+        roundResults.push({totalFlips: 999, totalTime: 999})
         resetGame()
   }
     else if (state.currentRound >= maxRounds) {
-      console.log('current round: ' + state.currentRound )
-
       const newLi = document.createElement("li");
         newLi.innerHTML = `
             <span class="lose-text">
@@ -290,22 +261,24 @@ function checkBestRound(){
             </span>
         `
         rounds.appendChild(newLi)
-
-        resetGame()
-        restartGame()
-
-      setTimeout(() => {
-        start.classList.add('inactive')
-        alert("Maximum number of resets reached")
-        }, 500)
-
-
-
-
-
-      //stop timer
+        roundResults.push({totalFlips: 999, totalTime: 999})
+        checkMaxResets()
+        state.currentRound++
     }
   }
+
+ function checkMaxResets(){
+  console.log(roundResults)
+  if ((roundResults[0].totalTime === 999) && (roundResults[1].totalTime === 999)){
+    setTimeout(() => {
+      start.classList.add('inactive')
+      alert("Maximum number of resets reached")
+      }, 500)
+  }
+  else checkBestRound()
+  resetGame()
+  restartGame()
+}
 
 
 window.onload = shuffle();
