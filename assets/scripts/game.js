@@ -71,7 +71,7 @@ const startGame = () => {
     else {    
       bgAudio.pause();
       loseAudio.play();
-      roundResults.push({totalFlips: state.totalFlips, totalTime: state.totalTime})    
+      roundResults.push({totalFlips: 998, totalTime: 998})    
 
       if (state.currentRound < maxRounds){
         const newLi = document.createElement("li");
@@ -94,6 +94,7 @@ const startGame = () => {
   `
     rounds.appendChild(newLi)
     resetGame()
+    checkBestRound()
     restartGame()
      }   
     }
