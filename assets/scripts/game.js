@@ -1,9 +1,7 @@
 // TO DO:
 // 1. Check sounds
-// 2. Readme
 // 3. Responsive design
 // 3. Mobile version
-// 4. If time - screenshots of different scenarios
 
 
 const cards = document.querySelectorAll('.card');
@@ -50,7 +48,7 @@ const startGame = () => {
     start.classList.add('inactive')
 
     let minutes, seconds;
-    let timer = 40;
+    let timer = 5;
 
     state.loop = setInterval(() => {
         if (--timer >= 0) {
@@ -73,6 +71,7 @@ const startGame = () => {
               Round #${state.currentRound} lost :(
           </span>
       `
+      alert('The time is over 😔')
       rounds.appendChild(newLi)
       resetGame();
      }
@@ -84,9 +83,10 @@ const startGame = () => {
           Round #${state.currentRound} lost :(
       </span>
   `
+    alert('The time is over 😔')
     rounds.appendChild(newLi)
     resetGame()
-    checkBestRound()
+    checkMaxResets()
     restartGame()
      }   
     }
@@ -100,7 +100,7 @@ const resetGame = () => {
         cards.forEach(card => card.addEventListener('click', flipCard));
         start.classList.remove('inactive')
         timeLeft.textContent = "Time left: 00:40";
-        timer = 40;
+        timer = 5;
         state.totalFlips = 0
         moves.innerText = `Moves: ${state.totalFlips}`
         state.totalTime = 0
@@ -261,13 +261,27 @@ function checkBestRound(){
   }
 
  function checkMaxResets(){
-  console.log(roundResults)
-  if ((roundResults[0].totalTime === 999) && (roundResults[1].totalTime === 999)){
+  if ((roundResults[0].totalTime === 999) && (roundResults[1].totalTime === 999) && (roundResults[2].totalTime === 999)){
     setTimeout(() => {
       start.classList.add('inactive')
       alert("Maximum number of resets reached")
       }, 500)
+      const newItem = document.createElement("span");
+        newItem.innerText = `
+                Game lost. Please try again 😉
+        `
+        results.appendChild(newItem)
   }
+  else if (((roundResults[0].totalTime === 998) || (roundResults[0].totalTime === 999)) 
+  && ((roundResults[1].totalTime === 998) || (roundResults[1].totalTime === 999)) 
+  && ((roundResults[2].totalTime === 998) || (roundResults[2].totalTime === 999))){
+    const newItem = document.createElement("span");
+        newItem.innerText = `
+                Game lost. Please try again 😉
+        `
+        results.appendChild(newItem)
+  }
+  
   else checkBestRound()
   resetGame()
   restartGame()
