@@ -1,16 +1,9 @@
-// 1. One player X
-// 2. 12 cards in total X
-// 3. Shuffle cards before start X
-// 4. The game start after pressing the START button X
-// 5. The game can be resetted by pressing the RESET button X
-// 6. The countdown timer starts with the game start X
-// 7. The moves counter starts with the game start X
-// 8. Player chooses 2 cards and tries to find 2 cards which are exactly the same X
-// 9. If the cards are a match, they will be kept flipped over X
-// 10. If the cards are NOT a match, they will be flipped back again X
-// 11. The game continues until all the the cards have been paired up X
-// 12. When finished, the results will be shown with the total time spent and the number of moves X
-// 13. The results will be added to the left side of the page with a round number accordingly X
+// TO DO:
+// 1. Check sounds
+// 2. Readme
+// 3. Responsive design
+// 3. Mobile version
+// 4. If time - screenshots of different scenarios
 
 
 const cards = document.querySelectorAll('.card');
@@ -82,7 +75,6 @@ const startGame = () => {
       `
       rounds.appendChild(newLi)
       resetGame();
-      alert("Game over ☹️")
      }
     
      else {
