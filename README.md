@@ -92,7 +92,7 @@ Project is _complete_
 - Add multiplayer functionality
 
 ## Acknowledgements
-- Many thanks to the Ironhack Lead Teacher [@Nilton de Freitas](https://github.com/oniltos) and the Teacher Assistant Felipe Osório for the support provided during the project development
+- Many thanks to the Ironhack LT [@Nilton de Freitas](https://github.com/oniltos) and the TA Felipe Osório for the support provided during the project development
 - Thanks to my husband Bruno Busquet for tolerating the lack of attention 😁
 - Special thanks to our dogs 🐶 Hope and Happy for keeping me warm when working on the project during chilly São Paulo mornings
 
