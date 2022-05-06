@@ -86,8 +86,8 @@ No special setup required
 Project is _complete_
 
 ## Room for Improvement
-- Responsive  Design
-- Adjust the page for mobile screens
+- Add responsive design
+- Adjust the game for mobile screens
 - Add difficulty levels by increasing the cards quantity and/or decreasing the timer
 - Add multiplayer functionality
 
