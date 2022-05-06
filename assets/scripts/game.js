@@ -48,7 +48,7 @@ const startGame = () => {
     start.classList.add('inactive')
 
     let minutes, seconds;
-    let timer = 5;
+    let timer = 40;
 
     state.loop = setInterval(() => {
         if (--timer >= 0) {
@@ -100,7 +100,7 @@ const resetGame = () => {
         cards.forEach(card => card.addEventListener('click', flipCard));
         start.classList.remove('inactive')
         timeLeft.textContent = "Time left: 00:40";
-        timer = 5;
+        timer = 40;
         state.totalFlips = 0
         moves.innerText = `Moves: ${state.totalFlips}`
         state.totalTime = 0
