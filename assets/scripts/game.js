@@ -1,9 +1,3 @@
-// TO DO:
-// 1. Check sounds
-// 3. Responsive design
-// 3. Mobile version
-
-
 const cards = document.querySelectorAll('.card');
 const moves = document.querySelector('.moves')
 const start = document.getElementById('start')
