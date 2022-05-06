@@ -60,7 +60,7 @@ const startGame = () => {
     } 
   
     else {    
-      bgAudio.pause();
+      bgAudio.pause()
       loseAudio.play();
       roundResults.push({totalFlips: 998, totalTime: 998})    
 
@@ -107,6 +107,7 @@ const resetGame = () => {
         state.gameStarted = false;
         state.currentRound++; 
         clearInterval(state.loop)
+        bgAudio.currentTime = 0
         bgAudio.pause()
         unflipCards()
         shuffle()
@@ -235,6 +236,7 @@ function checkBestRound(){
   }
 
   function checkReset(){
+    
     if (state.currentRound < maxRounds) {  
       const newLi = document.createElement("li");
         newLi.innerHTML = `
@@ -262,6 +264,7 @@ function checkBestRound(){
 
  function checkMaxResets(){
   if ((roundResults[0].totalTime === 999) && (roundResults[1].totalTime === 999) && (roundResults[2].totalTime === 999)){
+    loseAudio.play()
     setTimeout(() => {
       start.classList.add('inactive')
       alert("Maximum number of resets reached")
@@ -275,6 +278,7 @@ function checkBestRound(){
   else if (((roundResults[0].totalTime === 998) || (roundResults[0].totalTime === 999)) 
   && ((roundResults[1].totalTime === 998) || (roundResults[1].totalTime === 999)) 
   && ((roundResults[2].totalTime === 998) || (roundResults[2].totalTime === 999))){
+    loseAudio.play()
     const newItem = document.createElement("span");
         newItem.innerText = `
                 Game lost. Please try again 😉
