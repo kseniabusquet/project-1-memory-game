@@ -68,7 +68,7 @@ Best Round - same moves & different time
 ![Same moves, different time](./assets/img/screenshots/ss_same_moves_different_time.png)
 
 Best Round - same moves & same time
-![Same moves, same time](./assets/img/screenshots/ss_same moves_and_time.jpg)
+![Same moves, same time](./assets/img/screenshots/ss_same moves_same_time.jpg)
 
 Maximum Number of Resets Reached
 ![Maximum number of resets reached](./assets/img/screenshots/ss_max_resets.jpg)
