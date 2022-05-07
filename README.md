@@ -93,7 +93,7 @@ Project is _complete_
 
 ## Project Presentation
 
-[@Click here](https://www.canva.com/design/DAE-zo_a2ZY/W8Q3dtkL9jwWOhHJuh2qjQ/view?utm_content=DAE-zo_a2ZY&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink#1) to watch the project presentation!
+[Click here](https://www.canva.com/design/DAE-zo_a2ZY/W8Q3dtkL9jwWOhHJuh2qjQ/view?utm_content=DAE-zo_a2ZY&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink#1) to watch the project presentation!
 
 ## Acknowledgements
 - Many thanks to the Ironhack LT [@Nilton de Freitas](https://github.com/oniltos) and the TA [@Felipe Osório](https://github.com/Briofita09) for the support provided during the project development
