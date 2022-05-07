@@ -10,7 +10,7 @@
 * [Setup](#setup)
 * [Project Status](#project-status)
 * [Room for Improvement](#room-for-improvement)
-* [Prohect presentation](#project-presentation)
+* [Project presentation](#project-presentation)
 * [Acknowledgements](#acknowledgements)
 
 ## General Info
