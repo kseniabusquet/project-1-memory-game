@@ -10,6 +10,7 @@
 * [Setup](#setup)
 * [Project Status](#project-status)
 * [Room for Improvement](#room-for-improvement)
+* [Prohect presentation](#project-presentation)
 * [Acknowledgements](#acknowledgements)
 
 ## General Info
@@ -33,10 +34,9 @@ Memory game has long been a favorite game for all generations. It is easy to pla
 - If the cards are a match, they will be kept flipped over
 - If the cards are not a match, they will be flipped back again
 - The game continues until all the the cards have been paired up
-- If the countdown reached 0, and not all the cards have been flipped over, the round counts as lost
+- If the countdown reached 0, and not all the cards have been flipped over, the round counts as los, and a message _"Round lost :("_ will be displayed
 -  When the round is finished, the results will be displayed on the left hand-side, including the round number, the total time spent and the number of moves
 -  In case the round was started over with the **RESET** button, a message _"Round number #... resetted"_ will be displayed
--  In case the player has run out of time, a message _"Round lost :("_ will be displayed
 -  After 3 rounds played, the round with the best results will be displayed: _"The round with the best results: round #... with ... moves under ... seconds"_ 
 -  By the same number of moves, the shortest time will be considered and the following message will be displayed: _"There is more than one round with the best results: round #... and round #... with ... moves under ... seconds"_
 -  If no round was played (only lost or resetted), the game is considered **lost** and the following message will be displayed _"Game lost. Please try again 😉"_
@@ -91,8 +91,12 @@ Project is _complete_
 - Add difficulty levels by increasing the cards quantity and/or decreasing the timer
 - Add multiplayer functionality
 
+## Project Presentation
+
+[@Click here](https://www.canva.com/design/DAE-zo_a2ZY/W8Q3dtkL9jwWOhHJuh2qjQ/view?utm_content=DAE-zo_a2ZY&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink#1) to watch the project presentation!
+
 ## Acknowledgements
-- Many thanks to the Ironhack LT [@Nilton de Freitas](https://github.com/oniltos) and the TA Felipe Osório for the support provided during the project development
+- Many thanks to the Ironhack LT [@Nilton de Freitas](https://github.com/oniltos) and the TA [@Felipe Osório](https://github.com/Briofita09) for the support provided during the project development
 - Thanks to my husband Bruno Busquet for tolerating the lack of attention 😁
 - Special thanks to our dogs 🐶 Hope and Happy for keeping me warm when working on the project during chilly São Paulo mornings
 
